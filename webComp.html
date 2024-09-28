@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue App with Web Component Dropdown</title>
+    <!-- Include the Dropdown Web Component -->
+    <script src="/dropdown-component.js"></script>
+    <!-- Include Vue.js -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <dropdown-component
+            max-item-count="10"
+            url="http://localhost:3000/items"
+            key-property="id"
+            item-display-template="<b>id</b>) text"
+            selected-item='{"id":1,"text":"apple"}'
+            @item-selected="onItemSelected">
+        </dropdown-component>
+    </div>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {};
+            },
+            methods: {
+                onItemSelected(event) {
+                    // event.detail contains the selected item
+                    console.log('Selected item:', event.detail);
+                }
+            }
+        });
+
+        // Configure Vue to ignore 'dropdown-component'
+        app.config.compilerOptions.isCustomElement = tag => tag === 'dropdown-component';
+
+        app.mount('#app');
+    </script>
+</body>
+</html>
