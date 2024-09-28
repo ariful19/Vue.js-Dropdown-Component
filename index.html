@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/vueDdl.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <dropdown-component :max-item-count="10" url="http://localhost:3000/items" key-property="id"
+            item-display-template="<b>id</b>) text" @item-selected="onItemSelected">
+        </dropdown-component>
+    </div>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {};
+            },
+            components: {
+                'dropdown-component': DropdownComponent
+            },
+            methods: {
+                onItemSelected(item) {
+                    console.log('Selected item:', item);
+                }
+            }
+        });
+
+        app.mount('#app');
+    </script>
+</body>
+
+</html>
